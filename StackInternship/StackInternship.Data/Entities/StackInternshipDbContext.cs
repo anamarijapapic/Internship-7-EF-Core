@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using StackInternship.Data.Entities.Models;
 using System.IO;
 using System.Linq;
 
@@ -11,6 +12,13 @@ namespace StackInternship.Data.Entities
         public StackInternshipDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Upvote> Upvotes { get; set; }
+        public DbSet<Downvote> Downvotes { get; set; }
+        public DbSet<View> Views { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
