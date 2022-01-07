@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using StackInternship.Data.Entities.Models;
+using StackInternship.Data.Entities.Seeds;
 using System.IO;
 using System.Linq;
 
@@ -44,7 +45,7 @@ namespace StackInternship.Data.Entities
                 .HasForeignKey("UserId")
                 .OnDelete(DeleteBehavior.NoAction);
 
-            //DatabaseSeeder.Execute(modelBuilder);
+            DatabaseSeeder.Execute(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
     }
