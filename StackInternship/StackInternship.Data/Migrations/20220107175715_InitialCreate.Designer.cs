@@ -10,7 +10,7 @@ using StackInternship.Data.Entities;
 namespace StackInternship.Data.Migrations
 {
     [DbContext(typeof(StackInternshipDbContext))]
-    [Migration("20220107035923_InitialCreate")]
+    [Migration("20220107175715_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,7 +199,8 @@ namespace StackInternship.Data.Migrations
                 {
                     b.HasOne("StackInternship.Data.Entities.Models.Comment", "Parent")
                         .WithMany("Children")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("StackInternship.Data.Entities.Models.Resource", "Resource")
                         .WithMany("Comments")
@@ -210,7 +211,7 @@ namespace StackInternship.Data.Migrations
                     b.HasOne("StackInternship.Data.Entities.Models.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Parent");
@@ -288,7 +289,7 @@ namespace StackInternship.Data.Migrations
                     b.HasOne("StackInternship.Data.Entities.Models.User", "User")
                         .WithMany("Views")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Resource");

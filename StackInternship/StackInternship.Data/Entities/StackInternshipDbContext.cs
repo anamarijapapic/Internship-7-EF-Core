@@ -22,6 +22,28 @@ namespace StackInternship.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder
+                .Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments)
+                .HasForeignKey("UserId")
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
+
+            modelBuilder
+                .Entity<Comment>()
+                .HasOne(c => c.Parent)
+                .WithMany(pc => pc.Children)
+                .HasForeignKey("ParentId")
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+                .Entity<View>()
+                .HasOne(v => v.User)
+                .WithMany(u => u.Views)
+                .HasForeignKey("UserId")
+                .OnDelete(DeleteBehavior.NoAction);
+
             //DatabaseSeeder.Execute(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
